@@ -1,2 +1,2 @@
-# actions-package-helm-chart
+# action-package-helm-chart
 Github action to package helm charts
