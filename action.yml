@@ -1,0 +1,24 @@
+name: 'Package helm chart'
+description: 'An action to package the helm chart using the generated rabbitmq bindings.'
+
+inputs:
+  build_timestamp:
+    description: 'The build timestamp in the "yyyyMMddHHmmss" format. Ex: 20220106100059'
+    required: true
+  project_chart_name:
+    description: 'The chart name of this project (without ng- prefix). Ex: product-management'
+    required: true
+  artifactory_username:
+    description: 'The username to access the artifactory helm repo.'
+    required: true
+  artifactory_password:
+    description: 'The password to access the artifactory helm repo.'
+    required: true
+
+outputs:
+  chart-version: 
+    description: 'The version of the chart published'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile' # Publish this as a docker image and use it here so that it does not need to be build everytime
