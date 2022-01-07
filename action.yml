@@ -8,6 +8,10 @@ inputs:
   project_chart_name:
     description: 'The chart name of this project (without ng- prefix). Ex: product-management'
     required: true
+  helm_repo_url:
+    description: 'The repo URL'
+    required: true
+    default: https://epagesbeyond.jfrog.io/epagesbeyond/beyond-helm-local
   artifactory_username:
     description: 'The username to access the artifactory helm repo.'
     required: true
