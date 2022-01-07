@@ -11,7 +11,8 @@ unset HISTFILE # Disable generation of the .bash_history file
 # ARTIFACTORY_USERNAME
 # ARTIFACTORY_PASSWORD
 
-# This script could probably be ported to a github action or gradle task.
+# The variables come in lower case from the action parameters
+PROJECT_CHART_NAME=$project_chart_name
 
 # If there is no helm dir, exit
 if [ ! -d src/deploy/helm ]; then
