@@ -25,5 +25,5 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://epages/test:ci-helm' # Publish this as a docker image and use it here so that it does not need to be build everytime
+  image: 'docker://robertofilho/docker-java:ci-helm' # Publish this as a docker image and use it here so that it does not need to be build everytime
   # image: 'Dockerfile' # Publish this as a docker image and use it here so that it does not need to be build everytime
