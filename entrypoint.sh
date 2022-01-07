@@ -11,8 +11,9 @@ unset HISTFILE # Disable generation of the .bash_history file
 # ARTIFACTORY_USERNAME
 # ARTIFACTORY_PASSWORD
 
+echo $@
 # The variables come in lower case from the action parameters
-PROJECT_CHART_NAME=$1
+PROJECT_CHART_NAME="$2"
 
 # If there is no helm dir, exit
 if [ ! -d src/deploy/helm ]; then
