@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 set -o pipefail
-# set -x
+set -x
 unset HISTFILE # Disable generation of the .bash_history file
 
 # Variables to be passed down from calling process:
