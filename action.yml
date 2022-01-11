@@ -12,7 +12,6 @@ inputs:
   helm-repo-url:
     description: 'The repo URL'
     required: true
-    default: https://epagesbeyond.jfrog.io/epagesbeyond/beyond-helm-local
   artifactory-username:
     description: 'The username to access the artifactory helm repo.'
     required: true
