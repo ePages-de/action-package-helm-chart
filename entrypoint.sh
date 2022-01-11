@@ -72,4 +72,4 @@ curl -sS --fail -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" \
   -T "${helm_package_name}"
 
 # Set the output parameters
-echo "::set-output name=chart-version::$new_chart_version"
+echo "::set-output name=chart-version::${new_chart_version}"
