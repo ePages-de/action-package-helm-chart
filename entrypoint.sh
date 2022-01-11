@@ -18,6 +18,27 @@ HELM_REPO_URL="${3}"
 ARTIFACTORY_USERNAME="${4}"
 ARTIFACTORY_PASSWORD="${5}"
 
+if [[ -z "$BUILD_TIMESTAMP" ]]; then
+  echo "Missing mandatory parameter: 'BUILD_TIMESTAMP'"
+  exit 1
+fi
+if [[ -z "$PROJECT_CHART_NAME" ]]; then
+  echo "Missing mandatory parameter: 'BUILD_TIMESTAMP'"
+  exit 1
+fi
+if [[ -z "$HELM_REPO_URL" ]]; then
+  echo "Missing mandatory parameter: 'HELM_REPO_URL'"
+  exit 1
+fi
+if [[ -z "$ARTIFACTORY_USERNAME" ]]; then
+  echo "Missing mandatory parameter: 'ARTIFACTORY_USERNAME'"
+  exit 1
+fi
+if [[ -z "$ARTIFACTORY_PASSWORD" ]]; then
+  echo "Missing mandatory parameter: 'ARTIFACTORY_PASSWORD'"
+  exit 1
+fi
+
 # If there is no helm dir, exit
 if [ ! -d src/deploy/helm ]; then
   exit 0
@@ -72,5 +93,5 @@ curl -sS --fail -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" \
   -T "${helm_package_name}"
 
 # Set the output parameters
-echo ''
+echo '' # The set-output needs to be in a new line to work
 echo "::set-output name=chart-version::${new_chart_version}"
