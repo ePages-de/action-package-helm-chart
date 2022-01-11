@@ -20,7 +20,7 @@ inputs:
     required: true
 
 outputs:
-  chart-version: 
+  chart-version:
     description: 'The version of the chart published'
 
 runs:
