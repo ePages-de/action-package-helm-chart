@@ -11,9 +11,33 @@ unset HISTFILE # Disable generation of the .bash_history file
 # ARTIFACTORY_USERNAME
 # ARTIFACTORY_PASSWORD
 
-echo $@
-# The variables come in lower case from the action parameters
-PROJECT_CHART_NAME="$2"
+# The input parameters as upper case variables.
+BUILD_TIMESTAMP="${1}"
+PROJECT_CHART_NAME="${2}"
+HELM_REPO_URL="${3}"
+ARTIFACTORY_USERNAME="${4}"
+ARTIFACTORY_PASSWORD="${5}"
+
+if [[ -z "$BUILD_TIMESTAMP" ]]; then
+  echo "Missing mandatory parameter: 'BUILD_TIMESTAMP'"
+  exit 1
+fi
+if [[ -z "$PROJECT_CHART_NAME" ]]; then
+  echo "Missing mandatory parameter: 'BUILD_TIMESTAMP'"
+  exit 1
+fi
+if [[ -z "$HELM_REPO_URL" ]]; then
+  echo "Missing mandatory parameter: 'HELM_REPO_URL'"
+  exit 1
+fi
+if [[ -z "$ARTIFACTORY_USERNAME" ]]; then
+  echo "Missing mandatory parameter: 'ARTIFACTORY_USERNAME'"
+  exit 1
+fi
+if [[ -z "$ARTIFACTORY_PASSWORD" ]]; then
+  echo "Missing mandatory parameter: 'ARTIFACTORY_PASSWORD'"
+  exit 1
+fi
 
 # If there is no helm dir, exit
 if [ ! -d src/deploy/helm ]; then
@@ -64,14 +88,10 @@ helm package -u "${PROJECT_CHART_NAME}" --app-version "${BUILD_TIMESTAMP}" --ver
 
 helm_package_name="${PROJECT_CHART_NAME}-${new_chart_version}.tgz"
 
-if [ "$DEBUG_MODE" == "true" ]
-then
-  exit 0
-fi
-
 curl -sS --fail -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" \
   -X PUT "${HELM_REPO_URL}/${helm_package_name}" \
   -T "${helm_package_name}"
 
 # Set the output parameters
-echo "::set-output name=chart-version::$new_chart_version"
+echo '' # The set-output needs to be in a new line to work
+echo "::set-output name=chart-version::${new_chart_version}"
