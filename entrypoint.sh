@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -o errexit
 set -o pipefail
-set -x
+# set -x
 unset HISTFILE # Disable generation of the .bash_history file
 
 # Variables to be passed down from calling process:
@@ -11,8 +11,7 @@ unset HISTFILE # Disable generation of the .bash_history file
 # ARTIFACTORY_USERNAME
 # ARTIFACTORY_PASSWORD
 
-echo $@
-# The variables come in lower case from the action parameters
+# The input parameters as upper case variables.
 BUILD_TIMESTAMP="${1}"
 PROJECT_CHART_NAME="${2}"
 HELM_REPO_URL="${3}"
@@ -68,14 +67,9 @@ helm package -u "${PROJECT_CHART_NAME}" --app-version "${BUILD_TIMESTAMP}" --ver
 
 helm_package_name="${PROJECT_CHART_NAME}-${new_chart_version}.tgz"
 
-if [ "$DEBUG_MODE" == "true" ]
-then
-  exit 0
-fi
-
 curl -sS --fail -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" \
   -X PUT "${HELM_REPO_URL}/${helm_package_name}" \
   -T "${helm_package_name}"
 
 # Set the output parameters
-echo "::set-output name=chart-version::\"$new_chart_version\""
+echo "::set-output name=chart-version::$new_chart_version"

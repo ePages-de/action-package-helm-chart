@@ -1,5 +1,6 @@
 name: 'Package helm chart'
 description: 'An action to package the helm chart using the generated rabbitmq bindings.'
+author: 'Roberto Welzel Filho <rwelzel@epages.com>'
 
 inputs:
   build-timestamp:
