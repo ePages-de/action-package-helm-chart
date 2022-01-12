@@ -33,7 +33,7 @@ runs:
         name: message-artifact-values
         path: build/message-artifacts-helm
     - id: package-helm-chart
-      uses: ePages-de/action-package-helm-chart@develop
+      uses: ePages-de/action-package-helm-chart@v1
       with:
         build-timestamp: ${{ inputs.build-timestamp }}
         project-chart-name: ${{ inputs.project-chart-name }}
