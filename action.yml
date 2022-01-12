@@ -36,12 +36,8 @@ runs:
       uses: 'docker://robertofilho/docker-java:ci-helm'
       with:
         entrypoint: /entrypoint.sh
-        args:
-          - ${{ inputs.build-timestamp }}
-          - ${{ inputs.project-chart-name }}
-          - ${{ inputs.helm-repo-url }}
-          - ${{ inputs.artifactory-username }}
-          - ${{ inputs.artifactory-password }}
+        args: "${{ inputs.build-timestamp }}" "${{ inputs.project-chart-name }}" "${{ inputs.helm-repo-url }}" "${{ inputs.artifactory-username }}" "${{ inputs.artifactory-password }}"
+        shell: bash
     - id: export-chart-version
       run: |
         echo "::set-output name=chart-version::${{ steps.package-helm-chart.outputs.chart-version }}"
