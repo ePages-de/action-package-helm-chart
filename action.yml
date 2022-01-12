@@ -41,5 +41,6 @@ runs:
         artifactory-username: ${{ inputs.artifactory-username }}
         artifactory-password: ${{ inputs.artifactory-password }}
     - id: export-chart-version
+      shell: bash
       run: |
         echo "::set-output name=chart-version::${{ steps.package-helm-chart.outputs.chart-version }}"
