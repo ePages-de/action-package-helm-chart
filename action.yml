@@ -1,5 +1,5 @@
 name: 'Package helm chart'
-description: 'An action to package the helm chart using the generated rabbitmq bindings.'
+description: 'An composite action to package and publish the helm chart of ng services.'
 author: 'Roberto Welzel Filho <rwelzel@epages.com>'
 
 inputs:
@@ -34,7 +34,7 @@ runs:
         name: message-artifact-values
         path: build/message-artifacts-helm
     - id: package-helm-chart
-      uses: ePages-de/action-package-helm-chart@v1
+      uses: ./package-action
       with:
         build-timestamp: ${{ inputs.build-timestamp }}
         project-chart-name: ${{ inputs.project-chart-name }}
