@@ -22,6 +22,7 @@ inputs:
 outputs:
   chart-version:
     description: 'The version of the chart published'
+    value: ${{ steps.package-helm-chart.outputs.chart-version }}
 
 runs:
   using: 'composite'
@@ -40,7 +41,3 @@ runs:
         helm-repo-url: ${{ inputs.helm-repo-url }}
         artifactory-username: ${{ inputs.artifactory-username }}
         artifactory-password: ${{ inputs.artifactory-password }}
-    - id: export-chart-version
-      shell: bash
-      run: |
-        echo "::set-output name=chart-version::${{ steps.package-helm-chart.outputs.chart-version }}"
