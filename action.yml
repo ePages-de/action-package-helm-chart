@@ -24,11 +24,24 @@ outputs:
     description: 'The version of the chart published'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile' # Publish this as a docker image and use it here so that it does not need to be build everytime
-  args:
-    - ${{ inputs.build-timestamp }}
-    - ${{ inputs.project-chart-name }}
-    - ${{ inputs.helm-repo-url }}
-    - ${{ inputs.artifactory-username }}
-    - ${{ inputs.artifactory-password }}
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v2
+    - name: Download generated messaging helm values ⬇️
+      uses: actions/download-artifact@v2
+      with:
+        name: message-artifact-values
+        path: build/message-artifacts-helm
+    - id: package-helm-chart
+      uses: 'docker://robertofilho/docker-java:ci-helm'
+      with:
+        entrypoint: /entrypoint.sh
+        args:
+          - ${{ inputs.build-timestamp }}
+          - ${{ inputs.project-chart-name }}
+          - ${{ inputs.helm-repo-url }}
+          - ${{ inputs.artifactory-username }}
+          - ${{ inputs.artifactory-password }}
+    - id: export-chart-version
+      run: |
+        echo "::set-output name=chart-version::${{ steps.package-helm-chart.outputs.chart-version }}"
