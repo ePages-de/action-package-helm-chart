@@ -34,10 +34,7 @@ runs:
         name: message-artifact-values
         path: build/message-artifacts-helm
     - id: package-helm-chart
-      uses: ePages-de/action-package-helm/steps/package-action
+      uses: docker://robertofilho/docker-java:ci-helm
       with:
-        build-timestamp: ${{ inputs.build-timestamp }}
-        project-chart-name: ${{ inputs.project-chart-name }}
-        helm-repo-url: ${{ inputs.helm-repo-url }}
-        artifactory-username: ${{ inputs.artifactory-username }}
-        artifactory-password: ${{ inputs.artifactory-password }}
+        args: |
+          ${{ inputs.build-timestamp }} ${{ inputs.project-chart-name }} ${{ inputs.helm-repo-url }} ${{ inputs.artifactory-username }} ${{ inputs.artifactory-password }}
