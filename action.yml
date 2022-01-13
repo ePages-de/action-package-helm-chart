@@ -36,5 +36,9 @@ runs:
     - id: package-helm-chart
       uses: docker://robertofilho/docker-java:ci-helm
       with:
-        args: |
-          ${{ inputs.build-timestamp }} ${{ inputs.project-chart-name }} ${{ inputs.helm-repo-url }} ${{ inputs.artifactory-username }} ${{ inputs.artifactory-password }}
+        args: >-
+          ${{ inputs.build-timestamp }}
+          ${{ inputs.project-chart-name }}
+          ${{ inputs.helm-repo-url }}
+          ${{ inputs.artifactory-username }}
+          ${{ inputs.artifactory-password }}
