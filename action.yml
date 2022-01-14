@@ -1,5 +1,5 @@
 name: 'Package helm chart'
-description: 'An composite action to package and publish the helm chart of ng services.'
+description: 'A composite action to package and publish the helm chart of ng services.'
 author: 'Roberto Welzel Filho <rwelzel@epages.com>'
 
 inputs:
