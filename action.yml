@@ -44,7 +44,7 @@ runs:
         username: ${{ inputs.dockerhub-user }}
         password: ${{ inputs.dockerhub-password }}
     - id: package-helm-chart
-      uses: docker://robertofilho/docker-java:ci-helm
+      uses: docker://epages/ng-ci:build-ng-ci-test
       with:
         args: >-
           ${{ inputs.build-timestamp }}
