@@ -33,6 +33,10 @@ runs:
       with:
         name: message-artifact-values
         path: build/message-artifacts-helm
+    - uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.BYD_DOCKERHUB_USER }}
+        password: ${{ secrets.BYD_DOCKERHUB_PASSWORD }}
     - id: package-helm-chart
       uses: docker://robertofilho/docker-java:ci-helm
       with:
