@@ -36,7 +36,7 @@ runs:
     - id: package-helm-chart
       uses: docker://robertofilho/docker-java:ci-helm
       with:
-        entrypoint: './entrypoint.sh'
+        entrypoint: '/home/beyond-ci/entrypoint.sh'
         args: >-
           ${{ inputs.build-timestamp }}
           ${{ inputs.project-chart-name }}
