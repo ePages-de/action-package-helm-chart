@@ -2,7 +2,7 @@ name: "build package docker image"
 
 on:
   push:
-    branches: [ master, '*-test' ]
+    branches: [ master, '*-test', 'develop' ]
     paths:
       - 'package-action/**'
       - '.github/workflows/package-docker-image.yaml'
