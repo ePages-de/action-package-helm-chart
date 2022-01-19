@@ -33,6 +33,7 @@ The version of the chart that was published. Ex: 0.1.1641463259
 
 ## Example usage
 
+```yaml
 uses: ePages-de/action-package-helm-chart@v1
 with:
     build-timestamp: ${{ needs.build.outputs.build-timestamp }} # generated during build
@@ -40,3 +41,4 @@ with:
     helm-repo-url: https://my-company.jfrog.io/my-project/helm-charts
     artifactory-username: ${{ secrets.CHART_REPO_USER }}
     artifactory-password: ${{ secrets.CHART_REPO_PASSWORD }}
+```

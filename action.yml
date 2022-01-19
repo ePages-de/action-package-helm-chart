@@ -34,7 +34,7 @@ runs:
         name: message-artifact-values
         path: build/message-artifacts-helm
     - id: package-helm-chart
-      uses: docker://epages/ng-ci:build-ng-ci-test
+      uses: docker://epages/ng-action-package-helm-chart:develop
       with:
         args: >-
           ${{ inputs.build-timestamp }}
