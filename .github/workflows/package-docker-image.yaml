@@ -1,0 +1,29 @@
+name: "build package docker image"
+
+on:
+  push:
+    branches: [ master, '*-test' ]
+    paths:
+      - 'package-action/**'
+      - '.github/workflows/package-docker-image.yaml'
+  
+jobs:
+  build-docker-image:
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.BYD_DOCKERHUB_USER }}
+          password: ${{ secrets.BYD_DOCKERHUB_PASSWORD }}
+      - env:
+          REF: ${{ github.ref }}
+          REPO_NAME: 'ng-action-package-helm-chart'
+        working-directory: './package-action'
+        run: |
+          docker pull "$(grep "^FROM" Dockerfile  | cut -d " " -f2)"
+          tag="${GITHUB_REF##*/}" # Branch name
+          image_name="epages/${REPO_NAME}:${tag}"
+          DOCKER_BUILDKIT=1 docker build --no-cache -t "${image_name}" .
+          docker push "${image_name}"
