@@ -19,7 +19,7 @@ inputs:
     description: 'The password to access the artifactory helm repo.'
     required: true
   has-messaging:
-    description: 'Whether this service produces a rabbitMQ artifact in `build/message-artifacts-helm`.'
+    description: 'Whether the service generates a "message-artifacts-helm.yaml" file during build (typically when the service uses messaging).'
     required: true
     default: true
 

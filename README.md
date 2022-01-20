@@ -25,6 +25,10 @@ Wrapper around a script for packaging helm charts after building a ng service.
 
 **Required** The password to access the artifactory helm repo.
 
+## `has-messaging`
+
+Whether the service generates a "message-artifacts-helm.yaml" file during build (typically when the service uses messaging). Default is "true"
+
 ## Outputs
 
 ## `chart-version`
