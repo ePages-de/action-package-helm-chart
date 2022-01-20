@@ -81,6 +81,8 @@ if [ -f "$output_message_values" ]; then
   tail -n +2 "${RABBITMQ_ARTIFACTS_FILE}" | sed 's/^/  /' >> "${TMP_FILE}"
   tail -n "+$((HEADER_LINE_NUMBER + 1))" "${VALUES_FILE}" >> "${TMP_FILE}"
   mv "${TMP_FILE}" "${VALUES_FILE}"
+else
+  cd src/deploy/helm
 fi
 
 # Finally package it
