@@ -1,5 +1,5 @@
 name: 'Package helm chart'
-description: 'An action to package the helm chart using the generated rabbitmq bindings.'
+description: 'A composite action to package and publish the helm chart of ng services.'
 author: 'Roberto Welzel Filho <rwelzel@epages.com>'
 
 inputs:
@@ -18,17 +18,32 @@ inputs:
   artifactory-password:
     description: 'The password to access the artifactory helm repo.'
     required: true
+  has-messaging:
+    description: 'Whether the service generates a "message-artifacts-helm.yaml" file during build (typically when the service uses messaging).'
+    required: true
+    default: true
 
 outputs:
   chart-version:
     description: 'The version of the chart published'
+    value: ${{ steps.package-helm-chart.outputs.chart-version }}
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile' # Publish this as a docker image and use it here so that it does not need to be build everytime
-  args:
-    - ${{ inputs.build-timestamp }}
-    - ${{ inputs.project-chart-name }}
-    - ${{ inputs.helm-repo-url }}
-    - ${{ inputs.artifactory-username }}
-    - ${{ inputs.artifactory-password }}
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v2
+    - name: Download generated messaging helm values ⬇️
+      if: ${{ inputs.has-messaging == true }}
+      uses: actions/download-artifact@v2
+      with:
+        name: message-artifact-values
+        path: build/message-artifacts-helm
+    - id: package-helm-chart
+      uses: docker://epages/ng-action-package-helm-chart:develop
+      with:
+        args: >-
+          ${{ inputs.build-timestamp }}
+          ${{ inputs.project-chart-name }}
+          ${{ inputs.helm-repo-url }}
+          ${{ inputs.artifactory-username }}
+          ${{ inputs.artifactory-password }}
