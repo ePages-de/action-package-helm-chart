@@ -1,4 +1,4 @@
-FROM alpine/helm:3.6.1
+FROM alpine/helm:3.8.0
 
 RUN apk add --no-cache bash curl git
 
