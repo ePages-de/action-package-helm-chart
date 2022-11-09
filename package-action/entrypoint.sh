@@ -95,5 +95,5 @@ curl -sS --fail -u "${ARTIFACTORY_USERNAME}:${ARTIFACTORY_PASSWORD}" \
   -T "${helm_package_name}"
 
 # Set the output parameters
-echo '' # The set-output needs to be in a new line to work
-echo "::set-output name=chart-version::${new_chart_version}"
+echo '' # This needs to be in a new line to work
+echo "chart-version=${new_chart_version}" >> $GITHUB_OUTPUT

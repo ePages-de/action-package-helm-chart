@@ -38,7 +38,7 @@ The version of the chart that was published. Ex: 0.1.1641463259
 ## Example usage
 
 ```yaml
-uses: ePages-de/action-package-helm-chart@v1
+uses: ePages-de/action-package-helm-chart@v4
 with:
     build-timestamp: ${{ needs.build.outputs.build-timestamp }} # generated during build
     project-chart-name: "product-finder"
