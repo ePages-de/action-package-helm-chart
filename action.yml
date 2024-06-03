@@ -31,10 +31,10 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Download generated messaging helm values ⬇️
       if: ${{ inputs.has-messaging == 'true' }}
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: message-artifact-values
         path: build/message-artifacts-helm
