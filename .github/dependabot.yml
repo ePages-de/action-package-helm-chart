@@ -20,4 +20,4 @@ updates:
       - "ePages-de/team-x"
       - "ePages-de/team-white"
     cooldown:
-      default-days: 5
+      default-days: 30
