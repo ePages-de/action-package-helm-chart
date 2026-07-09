@@ -13,12 +13,12 @@ updates:
     cooldown:
       default-days: 5
   - package-ecosystem: "docker"
-    directory: "/"
     open-pull-requests-limit: 1
     schedule:
       interval: daily
+    directory: /package-action
     reviewers:
       - "ePages-de/team-x"
       - "ePages-de/team-white"
     cooldown:
-      default-days: 5
+      default-days: 30
