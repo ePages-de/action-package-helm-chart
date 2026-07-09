@@ -12,3 +12,13 @@ updates:
       - "ePages-de/team-white"
     cooldown:
       default-days: 5
+  - package-ecosystem: "docker"
+    directory: "/"
+    open-pull-requests-limit: 1
+    schedule:
+      interval: daily
+    reviewers:
+      - "ePages-de/team-x"
+      - "ePages-de/team-white"
+    cooldown:
+      default-days: 5
